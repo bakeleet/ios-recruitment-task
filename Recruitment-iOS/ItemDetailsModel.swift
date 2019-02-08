@@ -9,12 +9,16 @@
 import UIKit
 
 class ItemDetailsModel: ItemModel {
+    let desc: String
 
-    var desc:String
-    
-    init(name: String, color: UIColor, desc:String) {
+    override init?(with data: [String : AnyObject]) {
+        guard let attributes = data["attributes"] as? [String : AnyObject],
+            let desc = attributes["desc"] as? String else {
+                Logger.DLog(message: "failed unwrapping")
+                return nil
+        }
+
         self.desc = desc
-        super.init(name: name, color: color)
+        super.init(with: data)
     }
-    
 }

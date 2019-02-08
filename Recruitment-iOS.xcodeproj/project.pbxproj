@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C154EBD220DA3D40054D26C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C154EBC220DA3D40054D26C /* Logger.swift */; };
 		A4802C381D8ACB320032AF25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4802C321D8ACB320032AF25 /* AppDelegate.swift */; };
 		A4802C391D8ACB320032AF25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4802C331D8ACB320032AF25 /* Main.storyboard */; };
 		A4802C3A1D8ACB320032AF25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4802C341D8ACB320032AF25 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C154EBC220DA3D40054D26C /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A4802C1B1D8ACA5F0032AF25 /* Recruitment-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recruitment-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4802C2A1D8ACA5F0032AF25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4802C321D8ACB320032AF25 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C154EBE220DA54D0054D26C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4802C2A1D8ACA5F0032AF25 /* Info.plist */,
+				A4802C321D8ACB320032AF25 /* AppDelegate.swift */,
+				A4802C341D8ACB320032AF25 /* Assets.xcassets */,
+				A4802C351D8ACB320032AF25 /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		A4802C121D8ACA5F0032AF25 = {
 			isa = PBXGroup;
 			children = (
@@ -76,14 +89,12 @@
 		A4802C1D1D8ACA5F0032AF25 /* Recruitment-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				2C154EBC220DA3D40054D26C /* Logger.swift */,
 				A4802C3E1D8ACB6E0032AF25 /* Networking */,
-				A4802C2A1D8ACA5F0032AF25 /* Info.plist */,
-				A4802C321D8ACB320032AF25 /* AppDelegate.swift */,
-				A4802C331D8ACB320032AF25 /* Main.storyboard */,
-				A4802C341D8ACB320032AF25 /* Assets.xcassets */,
-				A4802C351D8ACB320032AF25 /* LaunchScreen.storyboard */,
 				A4802C361D8ACB320032AF25 /* TableViewController.swift */,
 				A4802C371D8ACB320032AF25 /* DetailsViewController.swift */,
+				A4802C331D8ACB320032AF25 /* Main.storyboard */,
+				2C154EBE220DA54D0054D26C /* Supporting Files */,
 			);
 			path = "Recruitment-iOS";
 			sourceTree = "<group>";
@@ -92,9 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				A4802C3F1D8ACB740032AF25 /* JSON */,
-				A4802C4C1D8ACB840032AF25 /* ItemModel.swift */,
 				A4802C4D1D8ACB840032AF25 /* JSONParser.swift */,
 				A4802C4E1D8ACB840032AF25 /* NetworkingManager.swift */,
+				A4802C4C1D8ACB840032AF25 /* ItemModel.swift */,
 				A4802C4F1D8ACB840032AF25 /* ItemDetailsModel.swift */,
 			);
 			name = Networking;
@@ -194,6 +205,7 @@
 				A4802C381D8ACB320032AF25 /* AppDelegate.swift in Sources */,
 				A4802C511D8ACB840032AF25 /* JSONParser.swift in Sources */,
 				A4802C3C1D8ACB320032AF25 /* TableViewController.swift in Sources */,
+				2C154EBD220DA3D40054D26C /* Logger.swift in Sources */,
 				A4802C521D8ACB840032AF25 /* NetworkingManager.swift in Sources */,
 				A4802C531D8ACB840032AF25 /* ItemDetailsModel.swift in Sources */,
 				A4802C501D8ACB840032AF25 /* ItemModel.swift in Sources */,

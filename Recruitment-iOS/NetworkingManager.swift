@@ -9,64 +9,54 @@
 import UIKit
 
 protocol NetworkingManagerDelegate {
-    
     func downloadedItems(_ items:[ItemModel])
     func downloadedItemDetails(_ itemDetails:ItemDetailsModel)
-    
 }
 
 class NetworkingManager: NSObject {
-
     static var sharedManager = NetworkingManager()
-    
     var delegate:NetworkingManagerDelegate?
-    
+
     func downloadItems() {
         request(filename: "Items.json") { dictionary in
-            let data = dictionary["data"]
-            let array = data as! Array<Dictionary<String, AnyObject>>
-            var result:[ItemModel] = []
-            for item in array {
-                let name = item["attributes"]?["name"] as? String
-                let colorString = item["attributes"]?["color"] as? String
-                var color:UIColor?
-                switch colorString! {
-                case "Red": color = UIColor.red
-                case "Green": color = UIColor.green
-                case "Blue": color = UIColor.blue
-                case "Yellow": color = UIColor.yellow
-                case "Purple": color = UIColor.purple
-                default: color = UIColor.black
+            guard let data = dictionary["data"] as? Array<Dictionary<String, AnyObject>> else {
+                Logger.DLog(message: "failed unwrapping")
+                return
+            }
+
+            var result: [ItemModel] = []
+
+            for item in data {
+                guard let itemModel = ItemModel(with: item) else {
+                    Logger.DLog(message: "failed unwrapping")
+                    return
                 }
-                let itemModel = ItemModel(name: name!, color: color!)
+
                 result.append(itemModel)
             }
+
             self.delegate?.downloadedItems(result)
         }
     }
-    
-    func downloadItemWithID(_ id:String) {
+
+    func downloadItemWithID(_ id: String) {
         let filename = "Item\(id).json"
+
         request(filename: filename) { dictionary in
-            let data = dictionary["data"]
-            let attributes = data!["attributes"]! as! Dictionary<String, AnyObject>
-            let name = attributes["name"] as? String
-            let colorString = attributes["color"] as? String
-            var color:UIColor?
-            switch colorString! {
-            case "Red": color = UIColor.red
-            case "Green": color = UIColor.green
-            case "Blue": color = UIColor.blue
-            case "Yellow": color = UIColor.yellow
-            case "Purple": color = UIColor.purple
-            default: color = UIColor.black
+            guard let data = dictionary["data"] as? Dictionary<String, AnyObject> else {
+                Logger.DLog(message: "failed unwrapping")
+                return
             }
-            let desc = attributes["desc"] as? String
-            let itemModelDetails = ItemDetailsModel(name: name!, color: color!, desc: desc!)
+
+            guard let itemModelDetails = ItemDetailsModel(with: data) else {
+                Logger.DLog(message: "failed unwrapping")
+                return
+            }
+
             self.delegate?.downloadedItemDetails(itemModelDetails)
         }
     }
-    
+
     private func request(filename:String, completionBlock:@escaping (Dictionary<String, AnyObject>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let dictionary = JSONParser.jsonFromFilename(filename) {
@@ -76,5 +66,4 @@ class NetworkingManager: NSObject {
             }
         }
     }
-    
 }

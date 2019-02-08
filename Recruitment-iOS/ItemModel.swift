@@ -9,13 +9,39 @@
 import UIKit
 
 class ItemModel {
+    let id: String
+    let name: String
 
-    var name:String
-    var color:UIColor
-    
-    init(name:String, color:UIColor) {
-        self.name  = name
-        self.color = color
+    private let _color: String
+    var color: UIColor {
+        return uiColor(from: _color)
     }
-    
+
+    init?(with data: [String: AnyObject]) {
+        guard let id = data["id"] as? String,
+            let attributes = data["attributes"] as? [String : AnyObject],
+            let name = attributes["name"] as? String,
+            let color = attributes["color"] as? String else {
+                Logger.DLog(message: "failed unwrapping")
+                return nil
+        }
+        self.id = id
+        self.name = name
+        self._color = color
+    }
+
+    private func uiColor(from colorString: String) -> UIColor {
+        var color: UIColor
+
+        switch colorString {
+        case "Red": color = UIColor.red
+        case "Green": color = UIColor.green
+        case "Blue": color = UIColor.blue
+        case "Yellow": color = UIColor.yellow
+        case "Purple": color = UIColor.purple
+        default: color = UIColor.black
+        }
+
+        return color
+    }
 }
