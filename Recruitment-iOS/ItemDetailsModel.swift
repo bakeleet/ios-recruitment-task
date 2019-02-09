@@ -14,7 +14,7 @@ class ItemDetailsModel: ItemModel {
     override init?(with data: [String: AnyObject]) {
         guard let attributes = data["attributes"] as? [String: AnyObject],
             let desc = attributes["desc"] as? String else {
-                Logger.DLog(message: "failed unwrapping")
+                Logger.DLog(message: "failed casting of desc")
                 return nil
         }
 

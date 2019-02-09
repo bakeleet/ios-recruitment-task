@@ -9,34 +9,37 @@
 import UIKit
 
 class DetailsViewController: UIViewController, NetworkingManagerDelegate {
-    
     @IBOutlet weak var textView: UITextView!
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let tableViewController = navigationController?.viewControllers[0] as! TableViewController
-        let selectedIndex = tableViewController.tableView.indexPathForSelectedRow?.row ?? 0
-        let title = tableViewController.itemModels[selectedIndex].name
-        var newTitle = ""
-        for (index, letter) in title.enumerated() {
-            let newLetter = index % 2 == 0 ? String(letter).lowercased() : String(letter).uppercased()
-            newTitle += newLetter
+
+    var itemModel: ItemModel? {
+        didSet {
+            reloadData()
         }
-        
-        self.title = newTitle
-        self.view.backgroundColor = tableViewController.itemModels[selectedIndex].color
-        
+    }
+
+    private func reloadData() {
+        guard let model = itemModel else {
+            Logger.DLog(message: "itemModel is nil")
+            return
+        }
+
+        // This chain below is certainly shorter than the for loop, but is it more readable?
+        self.navigationItem.title = Array(model.name).enumerated().map { idx, letter in
+                idx % 2 == 0 ? String(letter).uppercased() : String(letter).lowercased()
+            }.joined()
+        self.view.backgroundColor = model.color
+
         NetworkingManager.sharedManager.delegate = self
-        NetworkingManager.sharedManager.downloadItemWithID("1")
+        NetworkingManager.sharedManager.downloadItemWithID(model.idx)
     }
-    
+
+    // MARK: - NetworkingManagerDelegate methods
+
     func downloadedItems(_ items: [ItemModel]) {
-        
+
     }
-    
+
     func downloadedItemDetails(_ itemDetails: ItemDetailsModel) {
         textView.text = itemDetails.desc
     }
-
 }

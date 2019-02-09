@@ -20,7 +20,7 @@ class NetworkingManager: NSObject {
     func downloadItems() {
         request(filename: "Items.json") { dictionary in
             guard let data = dictionary["data"] as? [[String: AnyObject]] else {
-                Logger.DLog(message: "failed unwrapping")
+                Logger.DLog(message: "failed casting of data")
                 return
             }
 
@@ -28,7 +28,7 @@ class NetworkingManager: NSObject {
 
             for item in data {
                 guard let itemModel = ItemModel(with: item) else {
-                    Logger.DLog(message: "failed unwrapping")
+                    Logger.DLog(message: "failed creation of ItemModel")
                     return
                 }
 
@@ -44,12 +44,12 @@ class NetworkingManager: NSObject {
 
         request(filename: filename) { dictionary in
             guard let data = dictionary["data"] as? [String: AnyObject] else {
-                Logger.DLog(message: "failed unwrapping")
+                Logger.DLog(message: "failed casting of data")
                 return
             }
 
             guard let itemModelDetails = ItemDetailsModel(with: data) else {
-                Logger.DLog(message: "failed unwrapping")
+                Logger.DLog(message: "failed creation of ItemDetailsModel")
                 return
             }
 

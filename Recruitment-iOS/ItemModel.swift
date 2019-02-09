@@ -22,7 +22,7 @@ class ItemModel {
             let attributes = data["attributes"] as? [String: AnyObject],
             let name = attributes["name"] as? String,
             let color = attributes["color"] as? String else {
-                Logger.DLog(message: "failed unwrapping")
+                Logger.DLog(message: "failed casting of color")
                 return nil
         }
         self.idx = idx
