@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol NetworkingManagerDelegate {
-    func downloadedItems(_ items:[ItemModel])
-    func downloadedItemDetails(_ itemDetails:ItemDetailsModel)
+protocol NetworkingManagerDelegate: class {
+    func downloadedItems(_ items: [ItemModel])
+    func downloadedItemDetails(_ itemDetails: ItemDetailsModel)
 }
 
 class NetworkingManager: NSObject {
     static var sharedManager = NetworkingManager()
-    var delegate:NetworkingManagerDelegate?
+    weak var delegate: NetworkingManagerDelegate?
 
     func downloadItems() {
         request(filename: "Items.json") { dictionary in
-            guard let data = dictionary["data"] as? Array<Dictionary<String, AnyObject>> else {
+            guard let data = dictionary["data"] as? [[String: AnyObject]] else {
                 Logger.DLog(message: "failed unwrapping")
                 return
             }
@@ -39,11 +39,11 @@ class NetworkingManager: NSObject {
         }
     }
 
-    func downloadItemWithID(_ id: String) {
-        let filename = "Item\(id).json"
+    func downloadItemWithID(_ idx: String) {
+        let filename = "Item\(idx).json"
 
         request(filename: filename) { dictionary in
-            guard let data = dictionary["data"] as? Dictionary<String, AnyObject> else {
+            guard let data = dictionary["data"] as? [String: AnyObject] else {
                 Logger.DLog(message: "failed unwrapping")
                 return
             }
@@ -57,7 +57,7 @@ class NetworkingManager: NSObject {
         }
     }
 
-    private func request(filename:String, completionBlock:@escaping (Dictionary<String, AnyObject>) -> Void) {
+    private func request(filename: String, completionBlock:@escaping ([String: AnyObject]) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let dictionary = JSONParser.jsonFromFilename(filename) {
                 completionBlock(dictionary)

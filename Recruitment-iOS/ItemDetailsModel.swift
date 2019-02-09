@@ -11,8 +11,8 @@ import UIKit
 class ItemDetailsModel: ItemModel {
     let desc: String
 
-    override init?(with data: [String : AnyObject]) {
-        guard let attributes = data["attributes"] as? [String : AnyObject],
+    override init?(with data: [String: AnyObject]) {
+        guard let attributes = data["attributes"] as? [String: AnyObject],
             let desc = attributes["desc"] as? String else {
                 Logger.DLog(message: "failed unwrapping")
                 return nil

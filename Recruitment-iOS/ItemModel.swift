@@ -9,7 +9,7 @@
 import UIKit
 
 class ItemModel {
-    let id: String
+    let idx: String
     let name: String
 
     private let _color: String
@@ -18,14 +18,14 @@ class ItemModel {
     }
 
     init?(with data: [String: AnyObject]) {
-        guard let id = data["id"] as? String,
-            let attributes = data["attributes"] as? [String : AnyObject],
+        guard let idx = data["id"] as? String,
+            let attributes = data["attributes"] as? [String: AnyObject],
             let name = attributes["name"] as? String,
             let color = attributes["color"] as? String else {
                 Logger.DLog(message: "failed unwrapping")
                 return nil
         }
-        self.id = id
+        self.idx = idx
         self.name = name
         self._color = color
     }

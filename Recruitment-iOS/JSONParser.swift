@@ -9,13 +9,14 @@
 import Foundation
 
 class JSONParser {
-    static func jsonFromFilename(_ filename:String) -> [String:AnyObject]? {
+    static func jsonFromFilename(_ filename: String) -> [String: AnyObject]? {
         guard let filepath = Bundle.main.path(forResource: filename, ofType: "") else { return nil }
         do {
             let stringContent = try String(contentsOfFile: filepath, encoding: String.Encoding.utf8)
             if let data = stringContent.data(using: String.Encoding.utf8) {
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions())
-                return dictionary as? [String:AnyObject]
+                let dictionary = try JSONSerialization.jsonObject(with: data,
+                                                                  options: JSONSerialization.ReadingOptions())
+                return dictionary as? [String: AnyObject]
             } else {
                 return nil
             }

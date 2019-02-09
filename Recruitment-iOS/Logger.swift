@@ -9,7 +9,11 @@
 import Foundation
 
 class Logger {
-    static func DLog(message: String, file: String = #file, function: String = #function, line: Int = #line, column: Int = #column) {
+    static func DLog(message: String,
+                     file: String = #file,
+                     function: String = #function,
+                     line: Int = #line,
+                     column: Int = #column) {
         print("[DEBUG] \(file) : \(function) : \(line) : \(column) - \(message)")
     }
 }
