@@ -14,7 +14,7 @@ class CollectionViewController: UICollectionViewController {
                                              left: 20.0,
                                              bottom: 20.0,
                                              right: 20.0)
-    var itemModels: [ItemModel] = []
+    private var itemModels: [ItemModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,12 @@ class CollectionViewController: UICollectionViewController {
         NetworkingManager.sharedManager.delegate = self
         NetworkingManager.sharedManager.downloadItems()
     }
+
+    deinit {
+        print("CollectionViewController.deinit: here I go away")
+    }
+
+    // MARK: - UICollectionViewController methods
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemModels.count

@@ -11,6 +11,7 @@ import UIKit
 class ItemModel {
     let idx: String
     let name: String
+    let preview: String
 
     private let _color: String
     var color: UIColor {
@@ -22,12 +23,15 @@ class ItemModel {
             let attributes = data["attributes"] as? [String: AnyObject],
             let name = attributes["name"] as? String,
             let color = attributes["color"] as? String else {
-                Logger.DLog(message: "failed casting of color")
+                Logger.DLog(message: "failed optional init")
                 return nil
         }
         self.idx = idx
         self.name = name
         self._color = color
+
+        // Preview exists only in Items JSON, so in case data comes from ItemDetails empty string is set.
+        self.preview = attributes["preview"] as? String ?? ""
     }
 
     private func uiColor(from colorString: String) -> UIColor {

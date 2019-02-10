@@ -10,10 +10,13 @@ import UIKit
 
 class TableViewController: UITableViewController {
     private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var itemModels: [ItemModel] = []
+    private var itemModels: [ItemModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
 
         activityIndicator.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
         self.view.addSubview(activityIndicator)
@@ -33,6 +36,10 @@ class TableViewController: UITableViewController {
         }
     }
 
+    deinit {
+        print("TableViewController.deinit: here I go away")
+    }
+
     // MARK: - UITableViewController methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,6 +51,8 @@ class TableViewController: UITableViewController {
         let itemModel = itemModels[indexPath.row]
         cell.backgroundColor = itemModel.color
         cell.textLabel?.text = itemModel.name
+        cell.detailTextLabel?.text = itemModel.preview
+        cell.detailTextLabel?.numberOfLines = 0
         return cell
     }
 }
