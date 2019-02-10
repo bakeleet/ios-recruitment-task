@@ -52,11 +52,62 @@
                     </tabBar>
                     <connections>
                         <segue destination="uMF-bg-RQC" kind="relationship" relationship="viewControllers" id="lcM-VE-ac2"/>
+                        <segue destination="5mZ-b3-pGh" kind="relationship" relationship="viewControllers" id="rF4-PZ-IQ1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RyU-3M-cLE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1908" y="615.74212893553226"/>
+        </scene>
+        <!--Collection-->
+        <scene sceneID="3I3-A8-VCW">
+            <objects>
+                <collectionViewController id="5mZ-b3-pGh" customClass="CollectionViewController" customModule="Recruitment_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZK5-1F-J25">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nnN-nx-1BI">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellID" id="hNB-aQ-I1Q" customClass="CollectionViewCell" customModule="Recruitment_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2c-tG-gz5">
+                                            <rect key="frame" x="4" y="15" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="H2c-tG-gz5" firstAttribute="centerY" secondItem="hNB-aQ-I1Q" secondAttribute="centerY" id="UiJ-Sl-Wbm"/>
+                                    <constraint firstItem="H2c-tG-gz5" firstAttribute="centerX" secondItem="hNB-aQ-I1Q" secondAttribute="centerX" id="oU7-wr-Jrb"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="title" destination="H2c-tG-gz5" id="1Ts-Za-nCX"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="5mZ-b3-pGh" id="Om6-2y-Sv7"/>
+                            <outlet property="delegate" destination="5mZ-b3-pGh" id="n3K-RN-Axw"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Collection" id="TCj-T6-neg"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Nf-sB-gfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2694" y="1102"/>
         </scene>
         <!--List-->
         <scene sceneID="0o4-Vg-3dm">
@@ -93,7 +144,7 @@
                             <outlet property="delegate" destination="uMF-bg-RQC" id="zuQ-EL-47M"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="YZy-xW-j6V"/>
+                    <tabBarItem key="tabBarItem" title="Table" id="YZy-xW-j6V"/>
                     <navigationItem key="navigationItem" title="List" id="Xa1-gC-Fv5"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cH8-nx-jxi" userLabel="First Responder" sceneMemberID="firstResponder"/>

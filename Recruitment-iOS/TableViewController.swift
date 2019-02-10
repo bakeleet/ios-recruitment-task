@@ -8,11 +8,18 @@
 
 import UIKit
 
-class TableViewController: UITableViewController, NetworkingManagerDelegate {
+class TableViewController: UITableViewController {
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var itemModels: [ItemModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        activityIndicator.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
+        self.view.addSubview(activityIndicator)
+        self.tabBarController?.view.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+
         NetworkingManager.sharedManager.delegate = self
         NetworkingManager.sharedManager.downloadItems()
     }
@@ -39,12 +46,15 @@ class TableViewController: UITableViewController, NetworkingManagerDelegate {
         cell.textLabel?.text = itemModel.name
         return cell
     }
+}
 
-    // MARK: - NetworkingManagerDelegate methods
-
+extension TableViewController: NetworkingManagerDelegate {
     func downloadedItems(_ items: [ItemModel]) {
         self.itemModels = items
         self.tableView.reloadData()
+
+        self.tabBarController?.view.isUserInteractionEnabled = true
+        activityIndicator.removeFromSuperview()
     }
 
     func downloadedItemDetails(_ itemDetails: ItemDetailsModel) {

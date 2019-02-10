@@ -8,8 +8,8 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController, NetworkingManagerDelegate {
-    @IBOutlet weak var textView: UITextView!
+class DetailsViewController: UIViewController {
+    @IBOutlet var textView: UITextView!
 
     var itemModel: ItemModel? {
         didSet {
@@ -32,9 +32,9 @@ class DetailsViewController: UIViewController, NetworkingManagerDelegate {
         NetworkingManager.sharedManager.delegate = self
         NetworkingManager.sharedManager.downloadItemWithID(model.idx)
     }
+}
 
-    // MARK: - NetworkingManagerDelegate methods
-
+extension DetailsViewController: NetworkingManagerDelegate {
     func downloadedItems(_ items: [ItemModel]) {
 
     }
