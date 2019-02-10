@@ -28,6 +28,16 @@ class CollectionViewController: UICollectionViewController {
         NetworkingManager.sharedManager.downloadItems()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetails" {
+            if let cell = sender as? CollectionViewCell,
+                let indexPath = collectionView?.indexPath(for: cell),
+                let detailController = segue.destination as? DetailsViewController {
+                detailController.itemModel = itemModels[indexPath.row]
+            }
+        }
+    }
+
     deinit {
         print("CollectionViewController.deinit: here I go away")
     }
